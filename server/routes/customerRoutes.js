@@ -7,7 +7,7 @@ router.post('/add',async(req,res)=> {
     try {
         const customer = new Customer(req.body);
         customer.save();
-        res.status(201).json({message: 'Customer added successfully'});
+        res.status(201).json({message: 'Customer added successfully',customer});
     } catch (error) {
         res.status(500).json({message: 'Failed to add customer',details: error.message});
     }
