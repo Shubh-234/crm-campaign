@@ -15,7 +15,7 @@ router.post('/add',async(req,res)=> {
 
 router.get('/get',async (req,res)=> {
     try {
-        const customers = Customer.find();
+        const customers = await Customer.find();
         res.status(200).json(customers);
     } catch (error) {
         res.status(500).json({message: 'Error fetching customers',details: error.message});

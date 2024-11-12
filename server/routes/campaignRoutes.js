@@ -1,6 +1,6 @@
 const express = require('express');
 
-const router = express.router()
+const router = express.Router()
 
 const Campaign = require('../models/Campaign');
 
@@ -16,9 +16,11 @@ router.post('/add',async (req,res)=> {
 
 router.get('/get',async (req,res)=> {
     try {
-        const campaigns = Campaign.find();
+        const campaigns = await Campaign.find();
         res.status(200).json(campaigns);
     } catch (error) {
         res.status(500).json({message: 'An error occurred while fetching campaigns',details:error.message});
     }
 })
+
+module.exports = router;

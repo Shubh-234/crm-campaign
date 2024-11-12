@@ -1,5 +1,5 @@
 const express = require("express");
-const router = express.router();
+const router = express.Router();
 
 const Order = require('../models/Order')
 
@@ -15,10 +15,12 @@ router.post('/add',async (req,res)=> {
 
 router.get('/get',async (req,res)=> {
     try {
-        const orders = Order.find();
+        const orders = await Order.find();
         res.status(200).json(orders);
     } catch (error) {
-        res.status(500).json({message:'There was an error in finding the customers',details: error.message});
+        res.status(500).json({message:'There was an error in finding the orders',details: error.message});
     }
 });
+
+module.exports = router
 

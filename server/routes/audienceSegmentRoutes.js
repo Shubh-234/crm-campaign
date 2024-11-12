@@ -1,6 +1,6 @@
 const express = require("express")
 
-const router = express.router();
+const router = express.Router();
 
 const AudienceSegment = require('../models/AudienceSegment');
 
@@ -16,9 +16,11 @@ router.post('/add',async (req,res)=> {
 
 router.get('/get',async (req,res)=> {
     try {
-        const audienceSegments = AudienceSegment.find();
+        const audienceSegments = await AudienceSegment.find();
         res.status(200).json(audienceSegments);
     } catch (error) {
         res.status(500).json({message:'An error occurred while fetching audience segments',details:error.message})
     }
 });
+
+module.exports = router;
