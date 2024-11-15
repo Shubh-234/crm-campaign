@@ -1,13 +1,22 @@
 const express = require("express")
 const router = express.Router();
+const redis = require("redis");
+
+const redisClient = redis.createClient();
+redisClient.connect().catch(console.error);
 
 const Customer = require('../models/Customer')
 
 router.post('/add',async(req,res)=> {
     try {
-        const customer = new Customer(req.body);
-        customer.save();
-        res.status(201).json({message: 'Customer added successfully',customer});
+        const existingCustomer = await Customer.findOne({ email: req.body.email });
+        
+        if (existingCustomer) {
+            // If customer already exists, return an error
+            return res.status(500).json({ message: 'Email already exists' });
+        }
+        await redisClient.publish("customerChannel",JSON.stringify(req.body));
+        res.status(201).json({message:"Customer data published succesfully"});
     } catch (error) {
         res.status(500).json({message: 'Failed to add customer',details: error.message});
     }

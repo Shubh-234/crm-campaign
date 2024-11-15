@@ -5,6 +5,12 @@ const Order = require('../models/Order')
 
 router.post('/add',async (req,res)=> {
     try {
+        const customerExists = await Customer.findById(req.body.customerId);
+        
+        if (!customerExists) {
+            // If customerId does not exist, return an error response
+            return res.status(500).json({ message: 'Customer does not exist' });
+        }
         const order = new Order(req.body);
         order.save();
         res.status(201).json({message: 'New order has been added',order});

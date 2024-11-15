@@ -6,7 +6,6 @@ const communicationLogSchema = new mongoose.Schema({
   customerId: { type: mongoose.Schema.Types.ObjectId, ref: 'Customer', required: true },
   message: { type: String, required: true },
   status: { type: String, enum: ['SENT', 'FAILED'], required: true },
-  deliveryReceipt: { type: Boolean, default: false },
   sentAt: { type: Date, default: Date.now }
 });
 
