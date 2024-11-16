@@ -1,0 +1,82 @@
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;700&display=swap');
+
+.pricing-section {
+  background-color: white;
+  padding: 40px 20px;
+  color: #080A45;
+  text-align: center;
+  font-family: 'Bricolage Grotesque', sans-serif;
+}
+
+.topic {
+  font-size: 1.5em;
+  margin-bottom: 10px;
+}
+
+.pricing-heading {
+  font-size: 2em;
+  margin-bottom: 20px;
+}
+
+.pricing-subheading {
+  font-size: 1em;
+  margin-bottom: 30px;
+}
+
+.pricing-grid {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.pricing-box {
+  background-color: #C9B8F9;
+  padding: 20px;
+  border-radius: 10px;
+  width: 250px; 
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.pricing-box h4 {
+  margin-top: 0;
+  font-size: 1.2em;
+}
+
+.pricing-box p {
+  margin: 10px 0;
+}
+
+.price {
+  font-size: 2em;
+  margin: 10px 0;
+}
+
+.pricing-box ul {
+  list-style: none;
+  padding: 0;
+  flex-grow: 1;
+}
+
+.pricing-box ul li {
+  margin: 5px 0;
+}
+
+.pricing-button {
+  background-color: white;
+  color: #080A45;
+  border: 2px solid #080A45;
+  border-radius: 25px;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+  width: 100%; 
+  text-align: center;
+}
+
+.pricing-button:hover {
+  background-color: #080A45;
+  color: white;
+}

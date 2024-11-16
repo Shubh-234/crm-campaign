@@ -1,0 +1,49 @@
+.footer {
+    background-color: white;
+    color: #080A45;
+    text-align: center;
+    padding: 20px;
+}
+.footer-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footer-content p {
+    margin: 0;
+    font-size: 14px;
+}
+
+.social-links {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.social-links a {
+    color: #080A45;
+    margin: 0 10px;
+    font-size: 14px;
+}
+
+.resume-link {
+    color: #080A45;
+    text-decoration: none;
+    font-size: 14px; 
+}
+
+.resume-link:hover {
+    color: #C9B8F9;
+}
+
+.footer-blink {
+    animation: blink-animation 1s steps(5, start) infinite alternate;
+  }
+  
+  @keyframes blink-animation {
+    to {
+      color: red;
+    }
+  }

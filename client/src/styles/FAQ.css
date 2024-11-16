@@ -1,0 +1,38 @@
+.faq-section {
+    display: flex;
+    background-color: #080A45;
+    color: white;
+    font-family: 'Bricolage Grotesque', sans-serif;
+}
+  
+.left-section {
+    flex: 1;
+    padding: 40px;
+}
+  
+.left-section h2 {
+    font-size: 2em;
+}
+  
+.left-section p {
+    font-size: 1.2em;
+}
+  
+.right-section {
+    flex: 3;
+    padding: 40px;
+}
+  
+.faq-item {
+    margin-bottom: 40px;
+}
+  
+.faq-item h3 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+  
+.faq-item p {
+    font-size: 1.2em;
+}
+  

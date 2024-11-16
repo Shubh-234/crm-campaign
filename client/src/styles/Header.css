@@ -1,0 +1,41 @@
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;700&display=swap');
+
+.header-section {
+  text-align: center;
+  margin-top: 100px; 
+  margin-bottom: 50px;
+}
+
+.main-heading {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  color: #080A45;
+  font-size: 2.5em; 
+}
+
+.sub-heading {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  color: #080A45;
+  font-size: 1em; 
+  margin-top: 10px; 
+}
+
+.button-group {
+  margin-top: 20px; 
+}
+
+.primary-button, .secondary-button {
+  background-color: #080A45;
+  color: white;
+  border: none;
+  border-radius: 25px;
+  padding: 10px 20px;
+  font-size: 1em;
+  margin: 0 10px; 
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.primary-button:hover, .secondary-button:hover {
+  background-color: #575757;
+  transform: scale(1.05);
+}

@@ -1,0 +1,86 @@
+.container{
+  font-size: 2rem;
+}
+
+.dashboard {
+    background-color: #C9B8F9;
+    color: #080A45;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+  }
+  
+  .dash-navbar {
+    background-color: #080A45;
+    color: white;
+    width: 100%;
+    padding: 1em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .dash-navbar .logo {
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-left : 30px;
+    color:white;
+  }
+
+  a:visited{
+    color:white;
+  }
+  
+  .dash-navbar .dash-links button {
+    margin: 0 1em;
+    padding: 0.5em 1em;
+    background-color: #080A45;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .dashboard-content {
+    text-align: center;
+  }
+
+  .dash-links{
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  
+  .dash-links button{
+    margin: 0 1em;
+    padding: 0.5em 1em;
+    background-color: #080A45;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size:1rem;
+  }
+
+  .dash-links button:hover {
+    background-color: #0c0f5a;
+  }
+
+  .logout-btn {
+    padding: 0.5em 1em;
+    background-color: red; 
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-weight: bold;
+    text-align: center;
+    margin-right:30px;
+  }
+  
+  .logout-btn:hover {
+    background-color: #FF6E85;
+  }
