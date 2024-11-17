@@ -1,46 +1,65 @@
 @import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;700&display=swap');
 
-.features-section {
-  background-color: #E5D2CE;
-  padding: 40px 20px;
-  color: #080A45;
-  text-align: center;
+.highlights-section {
+  background-color: #E0F2F9; 
+  padding: 60px 30px;
+  color: #003366; 
   font-family: 'Bricolage Grotesque', sans-serif;
+  text-align: center;
 }
 
 .topic {
-  font-size: 1.5em;
-  margin-bottom: 10px;
+  font-size: 1.6em;
+  margin-bottom: 15px;
+  color: #001B48; 
 }
 
-.features-heading {
-  font-size: 2em;
-  margin-bottom: 20px;
+.highlights-heading {
+  font-size: 2.2em;
+  margin-bottom: 40px;
+  color: #003366; 
 }
 
-.features-subheading {
-  font-size: 1em;
-  margin-bottom: 30px;
+.highlights-columns {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
 }
 
-.features-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(250px, 1fr));
-  gap: 20px;
+.highlight-item {
+  background-color: #B3DFFC; 
+  padding: 25px;
+  border-radius: 15px;
   text-align: left;
+  max-width: 300px;
+  transition: transform 0.3s, box-shadow 0.3s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.feature-box {
-  background-color: #C9B8F9;
-  padding: 20px;
-  border-radius: 10px;
+.highlight-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
-.feature-box h4 {
-  margin-top: 0;
-  font-size: 1.2em;
+.icon-container {
+  font-size: 2em;
+  color: #00509E; 
+  margin-bottom: 15px;
 }
 
-.feature-box p {
-  margin: 10px 0 0 0;
+.highlight-item h4 {
+  font-size: 1.4em;
+  margin-bottom: 10px;
+  text-align: center;
+  color: #003366; 
+}
+
+.highlight-item p {
+  font-size: 1em;
+  text-align: center;
+  margin: 0;
+  color: #004080; 
 }

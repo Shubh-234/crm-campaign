@@ -1,4 +1,3 @@
-// server/models/CommunicationLog.js
 const mongoose = require('mongoose');
 
 const communicationLogSchema = new mongoose.Schema({

@@ -15,45 +15,48 @@ router.post('/create', async (req, res) => {
             return res.status(400).json({ message: "Campaign name, audience segment ID, and message are required." });
         }
 
+        console.log('testing');
+
         const audienceSegment = await AudienceSegment.findById(audienceSegmentId);
         if (!audienceSegment) {
             return res.status(404).json({ message: "Audience segment not found." });
         }
+        console.log(audienceSegment);
         const query = buildQuery(audienceSegment.conditions, audienceSegment.logic);
         
-        // Retrieve matching customers
+        
         const matchedCustomers = await Customer.find(query);
         
-        // Check if there are any matched customers
         if (matchedCustomers.length === 0) {
             return res.status(404).json({ message: "No customers match the specified audience segment criteria." });
         }
 
-        // Create and save the campaign with initial statistics set to 0
+      
         const newCampaign = new Campaign({
             name,
             audienceSegmentId,
             message,
-            audienceSize: matchedCustomers.length, // Save audience size
-            statistics: { impressions: 0, clicks: 0, conversions: 0 } // Initial statistics
+            audienceSize: matchedCustomers.length, 
+            // statistics: { impressions: 0, clicks: 0, conversions: 0 } // Initial statistics
         });
+        console.log(newCampaign)
         await newCampaign.save();
-
+        console.log('saving new campaign')
         res.status(201).json({
             message: "Campaign created successfully",
             campaign: newCampaign,
             audienceSize: matchedCustomers.length,
-            matchedCustomers: matchedCustomers.map(customer => customer._id) // Return only IDs for brevity
+            matchedCustomers: matchedCustomers.map(customer => customer._id) 
         });
+        console.log(campaign);
     } catch (error) {
         res.status(500).json({ message: "Failed to create campaign", details: error.message });
     }
 });
 
-// Route to retrieve campaigns with statistics
 router.get('/get', async (req, res) => {
     try {
-        const campaigns = await Campaign.find().sort({ createdAt: -1 }); // Order by most recent
+        const campaigns = await Campaign.find().sort({ createdAt: -1 }); 
 
         res.status(200).json(campaigns);
     } catch (error) {
@@ -68,7 +71,7 @@ router.post('/send-messages/:campaignId', async (req, res) => {
         const { campaignId } = req.params;
         console.log("Received campaignId:", campaignId);
 
-        // Convert campaignId to ObjectId
+
         const campaign = await Campaign.findById(new mongoose.Types.ObjectId(campaignId)).populate('audienceSegmentId');
         console.log("Found campaign:", campaign);
 
@@ -102,18 +105,35 @@ router.post('/send-messages/:campaignId', async (req, res) => {
     }
 });
 
-// Endpoint to get campaign statistics
+
 router.get('/statistics/:campaignId', async (req, res) => {
     try {
         const { campaignId } = req.params;
+
         
-        // Find campaign and calculate stats
+        const campaign = await Campaign.findById(campaignId).populate('audienceSegmentId');
+        if (!campaign) {
+            return res.status(404).json({ message: "Campaign not found." });
+        }
+
+        
+        const audienceSegment = campaign.audienceSegmentId;
+        if (!audienceSegment) {
+            return res.status(404).json({ message: "Audience segment not found for this campaign." });
+        }
+
+        
+        const query = buildQuery(audienceSegment.conditions, audienceSegment.logic);
+        const audienceSize = await Customer.countDocuments(query); 
+
+        
         const sentCount = await CommunicationLog.countDocuments({ campaignId, status: 'SENT' });
         const failedCount = await CommunicationLog.countDocuments({ campaignId, status: 'FAILED' });
 
+        
         res.status(200).json({
             campaignId,
-            audienceSize: sentCount + failedCount,
+            audienceSize, 
             sentCount,
             failedCount
         });
@@ -122,5 +142,22 @@ router.get('/statistics/:campaignId', async (req, res) => {
     }
 });
 
+
+
+router.delete('/delete/:campaignId',async (req,res)=>{
+    try {
+        const {campaignId} =req.params;
+        const campaign = Campaign.findById(campaignId);
+        if(!campaign){
+            res.status(400).json({message:"Campaign not found"});
+        }
+        await Campaign.findByIdAndDelete(campaignId);
+        await CommunicationLog.deleteMany({ campaignId });
+        res.status(200).json({message:"Campaign deleted successfully"});
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({message:"Unable to delete campaign",details:error.message});
+    }
+})
 
 module.exports = router;

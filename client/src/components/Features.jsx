@@ -3,28 +3,37 @@ import '../styles/Features.css';
 
 const Features = () => {
   return (
-    <div className="features-section">
-      <h2 className="topic">FEATURES</h2>
-      <h3 className="features-heading">Powerful Features to Boost Your Business</h3>
-      <p className="features-subheading">
-        Discover the key features that will streamline your workflow and drive growth
-      </p>
-      <div className="features-grid">
-        <div className="feature-box">
-          <h4>Contact Management</h4>
-          <p>Easily organize and access all your contacts in one place</p>
+    <div className="highlights-section">
+      <h2 className="topic">DISCOVER OUR EDGE</h2>
+      <h3 className="highlights-heading">Revolutionize Your Workflow with Smart Features</h3>
+      <div className="highlights-columns">
+        <div className="highlight-item">
+          <div className="icon-container">
+            <i className="fas fa-user-friends"></i>
+          </div>
+          <h4>Personalized Customer Support</h4>
+          <p>Deliver tailored support experiences with advanced tools and detailed customer profiles.</p>
         </div>
-        <div className="feature-box">
-          <h4>Sales Pipeline Tracking</h4>
-          <p>Visualize and manage your sales pipeline efficiently</p>
+        <div className="highlight-item">
+          <div className="icon-container">
+            <i className="fas fa-chart-line"></i>
+          </div>
+          <h4>Real-Time Progress Tracking</h4>
+          <p>Monitor tasks and campaigns with real-time updates and instant notifications.</p>
         </div>
-        <div className="feature-box">
-          <h4>Task Automation</h4>
-          <p>Automate repetitive tasks to save time and increase productivity</p>
+        <div className="highlight-item">
+          <div className="icon-container">
+            <i className="fas fa-cogs"></i>
+          </div>
+          <h4>Customizable Dashboards</h4>
+          <p>Design your workspace to fit your needs with flexible and intuitive dashboards.</p>
         </div>
-        <div className="feature-box">
-          <h4>Reporting and Analytics</h4>
-          <p>Generate detailed reports and gain valuable insights with analytics tools</p>
+        <div className="highlight-item">
+          <div className="icon-container">
+            <i className="fas fa-lock"></i>
+          </div>
+          <h4>Advanced Data Security</h4>
+          <p>Keep your information safe with enterprise-grade encryption and secure storage solutions.</p>
         </div>
       </div>
     </div>

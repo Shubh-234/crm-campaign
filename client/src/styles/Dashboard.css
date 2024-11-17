@@ -1,86 +1,126 @@
-.container{
-  font-size: 2rem;
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Bricolage Grotesque', sans-serif;
+  background-color: #1b1b3a; /* Dark blue background */
+  color: #e0e0e0; /* Light blue text for better contrast */
 }
 
 .dashboard {
-    background-color: #C9B8F9;
-    color: #080A45;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-  }
-  
-  .dash-navbar {
-    background-color: #080A45;
-    color: white;
-    width: 100%;
-    padding: 1em;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .dash-navbar .logo {
-    font-size: 1.5em;
-    font-weight: bold;
-    margin-left : 30px;
-    color:white;
-  }
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
 
-  a:visited{
-    color:white;
-  }
-  
-  .dash-navbar .dash-links button {
-    margin: 0 1em;
-    padding: 0.5em 1em;
-    background-color: #080A45;
-    color: white;
-    border: none;
-    cursor: pointer;
-  }
-  
-  .dashboard-content {
-    text-align: center;
-  }
+.dash-navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 40px;
+  background-color: #283593; /* Darker blue for navbar */
+}
 
-  .dash-links{
-    display:flex;
-    flex-direction: row;
-    justify-content: space-between;
-  }
-  
-  .dash-links button{
-    margin: 0 1em;
-    padding: 0.5em 1em;
-    background-color: #080A45;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    font-size:1rem;
-  }
+.dashboard-heading {
+  font-size: 36px;
+  color: #e0e0e0;
+  margin: 0;
+}
 
-  .dash-links button:hover {
-    background-color: #0c0f5a;
-  }
+.logout-btn {
+  background-color: #e74c3c;
+  color: #ffffff;
+  border: none;
+  padding: 12px 24px;
+  font-size: 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-family: 'Bricolage Grotesque', sans-serif;
+}
 
-  .logout-btn {
-    padding: 0.5em 1em;
-    background-color: red; 
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    font-weight: bold;
-    text-align: center;
-    margin-right:30px;
-  }
-  
-  .logout-btn:hover {
-    background-color: #FF6E85;
-  }
+.logout-btn:hover {
+  background-color: #c0392b;
+}
+
+.dashboard-main {
+  flex: 1;
+  padding: 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.welcome-section {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.welcome-section h2 {
+  font-size: 48px;
+  color: #dcdcdc;
+}
+
+.welcome-section p {
+  font-size: 24px;
+  color: #b0bec5;
+}
+
+.options-section {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  margin-bottom: 60px;
+}
+
+.option-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.option-card {
+  background-color: #3949ab; /* Blue card background */
+  padding: 40px 60px;
+  border-radius: 12px;
+  text-align: center;
+  transition: transform 0.2s, box-shadow 0.2s;
+  width: 320px;
+  box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.3);
+}
+
+.option-card h3 {
+  font-size: 28px;
+  color: #ffffff;
+  margin-bottom: 20px;
+}
+
+.option-card p {
+  font-size: 20px;
+  color: #c5cae9;
+}
+
+.option-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.5);
+}
+
+.filler-section {
+  margin-top: 40px;
+  text-align: center;
+  color: #c5cae9;
+}
+
+.filler-section h3 {
+  font-size: 32px;
+  color: #ffffff;
+  margin-bottom: 20px;
+}
+
+.filler-section ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.filler-section li {
+  font-size: 20px;
+  margin-bottom: 12px;
+  color: #c5cae9;
+}

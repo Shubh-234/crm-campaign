@@ -1,63 +1,78 @@
 import React, { useState } from "react";
-import { TextField, Button, Select, MenuItem, Grid, Typography, Card } from "@mui/material";
+import {
+  TextField,
+  Button,
+  Select,
+  MenuItem,
+  Grid,
+  Typography,
+  Card,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
+} from "@mui/material";
 import axios from "axios";
+import API from '../utils/api';
 
 const Audience = () => {
-  const [conditions, setConditions] = useState([]); // Stores all conditions
+  const [conditions, setConditions] = useState([]); 
   const [newCondition, setNewCondition] = useState({
     field: "",
     operator: "",
     value: "",
   }); // Temporarily stores a single condition
-  const [logic, setLogic] = useState("AND"); // Logic (AND/OR) between conditions
-  const [segmentName, setSegmentName] = useState(""); // Segment name
-  const [segmentSize, setSegmentSize] = useState(null); // Segment size from backend
-  const [matchedCustomers, setMatchedCustomers] = useState([]); // Matched customers from backend
-  const [error, setError] = useState(""); // Error messages
+  const [logic, setLogic] = useState("AND"); 
+  const [segmentName, setSegmentName] = useState(""); 
+  const [segmentSize, setSegmentSize] = useState(null); 
+  const [matchedCustomers, setMatchedCustomers] = useState([]); 
+  const [error, setError] = useState("");
 
-  // Add a new condition
   const addCondition = () => {
     if (newCondition.field && newCondition.operator && newCondition.value) {
       setConditions([
         ...conditions,
         {
           ...newCondition,
-          value: parseFloat(newCondition.value), // Ensure value is a number
+          value: parseFloat(newCondition.value.trim()), 
         },
       ]);
-      setNewCondition({ field: "", operator: "", value: "" }); // Reset input fields
+      setNewCondition({ field: "", operator: "", value: "" });
       setError("");
     } else {
       setError("Please complete all fields before adding a condition.");
     }
   };
 
-  // Remove a condition
   const removeCondition = (index) => {
     const updatedConditions = [...conditions];
     updatedConditions.splice(index, 1);
     setConditions(updatedConditions);
   };
 
-  // Calculate segment size without saving
   const calculateSegmentSize = async () => {
+    if (conditions.length === 0) {
+      setSegmentSize(null); 
+      setMatchedCustomers([]); 
+    }
+
     try {
       const payload = {
         conditions,
-        logic, // Pass the selected logic (AND/OR)
-        segmentName,
-        saveSegment: false, // Do not save the segment
+        logic,
+        saveSegment: false, 
       };
 
-      console.log("Request Payload:", payload); // Debugging the payload
-
-      const response = await axios.post(
+      const response = await API.post(
         "http://localhost:5000/api/audience-segment/calculatesegmentsize",
         payload
       );
 
-      setSegmentSize(response.data.segmentSize); // Set the segment size
-      setMatchedCustomers(response.data.matchedCustomers); // Set the matched customers
+      setSegmentSize(response.data.segmentSize); 
+      setMatchedCustomers(response.data.matchedCustomers); 
       setError("");
     } catch (err) {
       setError(
@@ -66,19 +81,16 @@ const Audience = () => {
     }
   };
 
-  // Save segment
   const saveSegment = async () => {
     try {
       const payload = {
         conditions,
-        logic, // Pass the selected logic (AND/OR)
+        logic, 
         segmentName,
         saveSegment: true, // Save the segment
       };
 
-      console.log("Save Payload:", payload); // Debugging the payload
-
-      await axios.post("http://localhost:5000/api/audience-segment/calculatesegmentsize", payload);
+      await API.post("http://localhost:5000/api/audience-segment/calculatesegmentsize", payload);
 
       setError("");
       alert("Segment saved successfully!");
@@ -89,15 +101,65 @@ const Audience = () => {
     }
   };
 
+  const styles = {
+    container: {
+      margin: "20px",
+      padding: "20px",
+      backgroundColor: "#f9f9f9",
+      boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)",
+      borderRadius: "12px",
+      fontFamily: "'Bricolage Grotesque', sans-serif",
+      color: "#080A45",
+    },
+    header: {
+      fontFamily: "'Bricolage Grotesque', sans-serif",
+      fontWeight: 700,
+      color: "#080A45",
+    },
+    subtitle: {
+      fontFamily: "'Bricolage Grotesque', sans-serif",
+      fontWeight: 500,
+      color: "#080A45",
+    },
+    addConditionButton: {
+      backgroundColor: "#6C63FF", 
+      color: "white",
+      fontWeight: "bold",
+      textTransform: "none",
+      borderRadius: "8px",
+    },
+    viewAudienceButton: {
+      backgroundColor: "#4F46E5", 
+      color: "white",
+      fontWeight: "bold",
+      textTransform: "none",
+      borderRadius: "8px",
+    },
+    saveSegmentButton: {
+      backgroundColor: "#4338CA", 
+      color: "white",
+      fontWeight: "bold",
+      textTransform: "none",
+      borderRadius: "8px",
+    },
+    tableHeader: {
+      backgroundColor: "#080A45",
+      color: "white",
+      fontWeight: "bold",
+    },
+  };
+
   return (
-    <Card style={{ margin: "20px", padding: "20px" }}>
-      <Typography variant="h5" gutterBottom>
+    <Card style={styles.container}>
+      <Typography variant="h4" gutterBottom style={styles.header}>
         Create Audience Segment
       </Typography>
       <Grid container spacing={2}>
         {/* Add Conditions Section */}
         <Grid item xs={12}>
-          <Typography variant="subtitle1">Add Conditions:</Typography>
+          <Typography variant="subtitle1" style={styles.subtitle}>
+            Add Conditions:
+          </Typography>
         </Grid>
         <Grid item xs={3}>
           <Select
@@ -105,6 +167,7 @@ const Audience = () => {
             onChange={(e) => setNewCondition({ ...newCondition, field: e.target.value })}
             fullWidth
             displayEmpty
+            style={{ backgroundColor: "white", borderRadius: "4px" }}
           >
             <MenuItem value="" disabled>
               Select Field
@@ -120,6 +183,7 @@ const Audience = () => {
             onChange={(e) => setNewCondition({ ...newCondition, operator: e.target.value })}
             fullWidth
             displayEmpty
+            style={{ backgroundColor: "white", borderRadius: "4px" }}
           >
             <MenuItem value="" disabled>
               Select Operator
@@ -139,24 +203,38 @@ const Audience = () => {
             onChange={(e) => setNewCondition({ ...newCondition, value: e.target.value })}
             placeholder="Value"
             fullWidth
+            style={{ backgroundColor: "white", borderRadius: "4px" }}
           />
         </Grid>
         <Grid item xs={3}>
-          <Button variant="contained" onClick={addCondition}>
+          <Button variant="contained" style={styles.addConditionButton} onClick={addCondition}>
             Add Condition
           </Button>
         </Grid>
 
         {/* List Conditions */}
         <Grid item xs={12}>
-          <Typography variant="subtitle1">Conditions:</Typography>
+          <Typography variant="subtitle1" style={styles.subtitle}>
+            Conditions:
+          </Typography>
           {conditions.map((condition, index) => (
-            <div key={index} style={{ display: "flex", alignItems: "center", marginBottom: "8px" }}>
-              <Typography>{`${condition.field} ${condition.operator} ${condition.value}`}</Typography>
+            <div
+              key={index}
+              style={{
+                display: "flex",
+                alignItems: "center",
+                marginBottom: "8px",
+              }}
+            >
+              <Typography style={styles.subtitle}>{`${condition.field} ${condition.operator} ${condition.value}`}</Typography>
               <Button
                 onClick={() => removeCondition(index)}
-                color="error"
-                style={{ marginLeft: "8px" }}
+                style={{
+                  color: "#f44336",
+                  fontWeight: "bold",
+                  marginLeft: "8px",
+                  fontFamily: "'Bricolage Grotesque', sans-serif",
+                }}
               >
                 Remove
               </Button>
@@ -166,11 +244,14 @@ const Audience = () => {
 
         {/* Logic Selector */}
         <Grid item xs={12}>
-          <Typography variant="subtitle1">Logic Between Conditions:</Typography>
+          <Typography variant="subtitle1" style={styles.subtitle}>
+            Logic Between Conditions:
+          </Typography>
           <Select
             value={logic}
             onChange={(e) => setLogic(e.target.value)}
             fullWidth
+            style={{ backgroundColor: "white", borderRadius: "4px" }}
           >
             <MenuItem value="AND">AND</MenuItem>
             <MenuItem value="OR">OR</MenuItem>
@@ -184,17 +265,26 @@ const Audience = () => {
             onChange={(e) => setSegmentName(e.target.value)}
             placeholder="Segment Name (Optional)"
             fullWidth
+            style={{ backgroundColor: "white", borderRadius: "4px" }}
           />
         </Grid>
 
         {/* Actions */}
         <Grid item xs={6}>
-          <Button variant="contained" onClick={calculateSegmentSize}>
-            Calculate Segment Size
+          <Button
+            variant="contained"
+            style={styles.viewAudienceButton}
+            onClick={calculateSegmentSize}
+          >
+            View Audience
           </Button>
         </Grid>
         <Grid item xs={6}>
-          <Button variant="contained" color="primary" onClick={saveSegment}>
+          <Button
+            variant="contained"
+            style={styles.saveSegmentButton}
+            onClick={saveSegment}
+          >
             Save Segment
           </Button>
         </Grid>
@@ -202,14 +292,48 @@ const Audience = () => {
         {/* Error Messages */}
         {error && (
           <Grid item xs={12}>
-            <Typography color="error">{error}</Typography>
+            <Typography color="error" style={{ fontFamily: "'Bricolage Grotesque', sans-serif" }}>
+              {error}
+            </Typography>
           </Grid>
         )}
 
         {/* Segment Size */}
         {segmentSize !== null && (
           <Grid item xs={12}>
-            <Typography variant="h6">Segment Size: {segmentSize}</Typography>
+            <Typography variant="h6" style={styles.subtitle}>
+              Segment Size: {segmentSize}
+            </Typography>
+          </Grid>
+        )}
+
+        {/* Matched Customers Table */}
+        {matchedCustomers.length > 0 && (
+          <Grid item xs={12}>
+            <TableContainer component={Paper} style={{ marginTop: "20px", borderRadius: "8px" }}>
+              <Table>
+                <TableHead>
+                  <TableRow>
+                    <TableCell style={styles.tableHeader}>Name</TableCell>
+                    <TableCell style={styles.tableHeader}>Email</TableCell>
+                    <TableCell style={styles.tableHeader}>Total Spending</TableCell>
+                    <TableCell style={styles.tableHeader}>Visit Count</TableCell>
+                    <TableCell style={styles.tableHeader}>Last Visit Date</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {matchedCustomers.map((customer) => (
+                    <TableRow key={customer._id}>
+                      <TableCell>{customer.name}</TableCell>
+                      <TableCell>{customer.email}</TableCell>
+                      <TableCell>{customer.totalSpending}</TableCell>
+                      <TableCell>{customer.visitCount}</TableCell>
+                      <TableCell>{new Date(customer.lastVisitDate).toLocaleDateString()}</TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
           </Grid>
         )}
       </Grid>

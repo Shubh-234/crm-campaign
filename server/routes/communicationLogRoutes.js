@@ -26,13 +26,13 @@ router.get('/get',async (req,res)=> {
     }
 })
 
-// Update delivery receipt for a specific communication log
+
 router.put('/update-receipt/:logId', async (req, res) => {
     try {
         const { logId } = req.params;
-        const status = Math.random() < 0.9 ? 'SENT' : 'FAILED'; // Random status
+        const status = Math.random() < 0.9 ? 'SENT' : 'FAILED'; 
 
-        // Publish the update message to the Redis channel
+        
         await redisClient.publish("deliveryReceiptChannel", JSON.stringify({ logId, status }));
 
         res.status(200).json({ message: "Delivery status queued for update" });

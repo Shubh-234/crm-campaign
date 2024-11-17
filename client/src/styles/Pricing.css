@@ -1,82 +1,111 @@
 @import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;700&display=swap');
 
 .pricing-section {
-  background-color: white;
-  padding: 40px 20px;
-  color: #080A45;
+  background-color: #E8EDF8;
+  padding: 60px 20px;
+  color: #1E2A5A; 
   text-align: center;
   font-family: 'Bricolage Grotesque', sans-serif;
 }
 
 .topic {
-  font-size: 1.5em;
-  margin-bottom: 10px;
+  font-size: 1.6em;
+  margin-bottom: 15px;
 }
 
 .pricing-heading {
-  font-size: 2em;
-  margin-bottom: 20px;
+  font-size: 2.4em;
+  margin-bottom: 30px;
+  color: #2C3A77; 
 }
 
 .pricing-subheading {
-  font-size: 1em;
-  margin-bottom: 30px;
+  font-size: 1.1em;
+  margin-bottom: 40px;
+  color: #3D4B8A; 
 }
 
 .pricing-grid {
   display: flex;
   justify-content: center;
-  gap: 20px;
+  gap: 30px;
+  flex-wrap: wrap;
 }
 
 .pricing-box {
-  background-color: #C9B8F9;
-  padding: 20px;
-  border-radius: 10px;
-  width: 250px; 
+  background-color: #344766; /* A sophisticated dark blue */
+  padding: 30px;
+  border-radius: 15px;
+  width: 300px; 
   text-align: left;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  color: white;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.pricing-box:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
 }
 
 .pricing-box h4 {
   margin-top: 0;
-  font-size: 1.2em;
+  font-size: 1.6em;
+  text-align: center;
+  border-bottom: 2px solid white;
+  padding-bottom: 10px;
+  color: #E6E9F2; 
 }
 
 .pricing-box p {
-  margin: 10px 0;
+  margin: 15px 0;
+  text-align: center;
+  font-size: 1em;
+  color: #DDE3F0; 
 }
 
 .price {
-  font-size: 2em;
-  margin: 10px 0;
+  font-size: 2.6em;
+  text-align: center;
+  margin: 20px 0;
+  font-weight: bold;
+  color: #FFC857; 
 }
 
 .pricing-box ul {
   list-style: none;
   padding: 0;
-  flex-grow: 1;
 }
 
 .pricing-box ul li {
-  margin: 5px 0;
+  margin: 10px 0;
+  font-size: 1em;
+  display: flex;
+  align-items: center;
+}
+
+.pricing-box ul li::before {
+  content: "✔";
+  color: #FFC857; 
+  font-weight: bold;
+  margin-right: 8px;
 }
 
 .pricing-button {
-  background-color: white;
-  color: #080A45;
-  border: 2px solid #080A45;
+  background-color: #4A63B4; 
+  color: white;
+  border: none;
   border-radius: 25px;
-  padding: 10px 20px;
+  padding: 12px 25px;
   cursor: pointer;
-  transition: background-color 0.3s, color 0.3s;
-  width: 100%; 
   text-align: center;
+  font-size: 1.1em;
+  transition: background-color 0.3s, transform 0.3s;
 }
 
 .pricing-button:hover {
-  background-color: #080A45;
-  color: white;
+  background-color: #3B4E8A; 
+  transform: scale(1.05);
 }

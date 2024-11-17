@@ -14,7 +14,7 @@ function buildQuery(conditions, logic) {
         }
     });
 
-    // Use AND or OR logic for query conditions
+   
     return logic === 'AND' ? { $and: queryConditions } : { $or: queryConditions };
 }
 

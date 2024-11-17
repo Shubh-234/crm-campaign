@@ -1,4 +1,3 @@
-// server/routes/audienceSegmentRoutes.js
 const express = require('express');
 const router = express.Router();
 const AudienceSegment = require('../models/AudienceSegment');
@@ -8,12 +7,15 @@ const { buildQuery } = require('../utils/queryBuilder');
 router.post('/calculatesegmentsize', async (req, res) => {
     try {
         const { conditions, logic, saveSegment, segmentName } = req.body;
+        if(!conditions || conditions.length === 0){
+            return res.status(400).json({message: "Please select atleast one condition"})
+        }
         const query = buildQuery(conditions, logic);
 
         const matchedCustomers = await Customer.find(query);
         const segmentSize = matchedCustomers.length;
+        console.log(segmentSize);
 
-        // Save segment if `saveSegment` is true
         if (saveSegment) {
             const newSegment = new AudienceSegment({
                 name: segmentName || "Unnamed Segment",
@@ -25,6 +27,7 @@ router.post('/calculatesegmentsize', async (req, res) => {
 
         res.status(200).json({ segmentSize, matchedCustomers });
     } catch (error) {
+        console.log(error.message);
         res.status(500).json({ message: "Failed to calculate segment size", details: error.message });
     }
 });
