@@ -2,7 +2,7 @@ const express = require("express")
 const router = express.Router();
 const redis = require("redis");
 
-const redisClient = redis.createClient();
+const redisClient = redis.createClient({url:"redis://red-cssvf5t6l47c73ego4g0:6379"});
 redisClient.connect().catch(console.error);
 
 const Customer = require('../models/Customer')

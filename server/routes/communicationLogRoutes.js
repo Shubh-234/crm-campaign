@@ -3,7 +3,7 @@ const router = express.Router()
 
 const CommunicationLog = require('../models/CommunicationLog');
 const redis = require('redis');
-const redisClient = redis.createClient();
+const redisClient = redis.createClient({url : "redis://red-cssvf5t6l47c73ego4g0:6379"});
 redisClient.connect().catch(console.error);
 
 

@@ -5,7 +5,7 @@ const redis = require("redis");
 const mongoose = require("mongoose");
 const CommunicationLog = require('./models/CommunicationLog');
 
-const redisSubscriber = redis.createClient();
+const redisSubscriber = redis.createClient({url : "redis://red-cssvf5t6l47c73ego4g0:6379"});
 redisSubscriber.connect().catch(console.error);
 
 
