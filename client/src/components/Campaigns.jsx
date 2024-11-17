@@ -53,7 +53,7 @@ const Campaigns = () => {
       setError("All fields are required to create a campaign.");
       return;
     }
-
+    
     try {
       const payload = {
         name: campaignName,
@@ -61,7 +61,7 @@ const Campaigns = () => {
         message: campaignMessage,
       };
 
-      const response = await axios.post("https://crm-campaign.onrender.com/api/campaign/create", payload);
+      const response = await API.post("https://crm-campaign.onrender.com/api/campaign/create", payload);
 
       setCampaigns([response.data.campaign, ...campaigns]);
       setOpenDialog(false);
@@ -256,13 +256,71 @@ const Campaigns = () => {
       </Grid>
       {/* Create Campaign Dialog */}
       <Dialog open={openDialog} onClose={() => setOpenDialog(false)}>
-        {/* Dialog Content */}
-      </Dialog>
+  <DialogTitle>Create New Campaign</DialogTitle>
+  <DialogContent>
+    <TextField
+      fullWidth
+      label="Campaign Name"
+      value={campaignName}
+      onChange={(e) => setCampaignName(e.target.value)}
+      sx={{ marginBottom: "16px" }}
+    />
+    <Select
+      fullWidth
+      value={selectedSegmentId}
+      onChange={(e) => setSelectedSegmentId(e.target.value)}
+      displayEmpty
+      sx={{ marginBottom: "16px" }}
+    >
+      <MenuItem value="" disabled>
+        Select Audience Segment
+      </MenuItem>
+      {audienceSegments.map((segment) => (
+        <MenuItem key={segment._id} value={segment._id}>
+          {segment.name}
+        </MenuItem>
+      ))}
+    </Select>
+    <TextField
+      fullWidth
+      label="Campaign Message"
+      multiline
+      rows={4}
+      value={campaignMessage}
+      onChange={(e) => setCampaignMessage(e.target.value)}
+    />
+    {error && (
+      <Typography color="error" sx={{ marginTop: "16px" }}>
+        {error}
+      </Typography>
+    )}
+  </DialogContent>
+  <DialogActions>
+    <Button onClick={() => setOpenDialog(false)}>Cancel</Button>
+    <Button onClick={handleCreateCampaign}>Create</Button>
+  </DialogActions>
+</Dialog>
+
 
       {/* Campaign Statistics Dialog */}
       <Dialog open={openStatsDialog} onClose={() => setOpenStatsDialog(false)}>
-        {/* Dialog Content */}
-      </Dialog>
+  <DialogTitle>Campaign Statistics</DialogTitle>
+  <DialogContent>
+    {statistics ? (
+      <Box>
+        <Typography>Audience Size: {statistics.audienceSize}</Typography>
+        <Typography>Messages Sent: {statistics.sentCount}</Typography>
+        <Typography>Messages Failed: {statistics.failedCount}</Typography>
+      </Box>
+    ) : (
+      <Typography>Loading...</Typography>
+    )}
+  </DialogContent>
+  <DialogActions>
+    <Button onClick={() => setOpenStatsDialog(false)}>Close</Button>
+  </DialogActions>
+</Dialog>
+
     </Box>
   );
 };
