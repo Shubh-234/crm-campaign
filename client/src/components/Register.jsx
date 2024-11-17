@@ -32,7 +32,7 @@ const Register = () => {
   const handleGoogleLogin = useGoogleLogin({
     onSuccess: async (tokenResponse) => {
       const response = await axios.post(
-        "http://localhost:5000/auth/google-login",
+        "https://crm-campaign.onrender.com/auth/google-login",
         {
           token: tokenResponse.access_token,
         }

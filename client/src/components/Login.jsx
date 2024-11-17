@@ -39,7 +39,7 @@ const Login = () => {
     onSuccess: async (tokenResponse) => {
       try {
         // Send the Google access token to the backend
-        const response = await axios.post("http://localhost:5000/auth/google-login", {
+        const response = await axios.post("https://crm-campaign.onrender.com/auth/google-login", {
           token: tokenResponse.access_token,
         });
 

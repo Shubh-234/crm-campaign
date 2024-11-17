@@ -32,7 +32,7 @@ const Campaigns = () => {
 
   const fetchCampaigns = async () => {
     try {
-      const response = await API.get("http://localhost:5000/api/campaign/get");
+      const response = await API.get("https://crm-campaign.onrender.com/api/campaign/get");
       setCampaigns(response.data);
     } catch (error) {
       console.error("Error fetching campaigns:", error.response?.data || error.message);
@@ -41,7 +41,7 @@ const Campaigns = () => {
 
   const fetchAudienceSegments = async () => {
     try {
-      const response = await API.get("http://localhost:5000/api/audience-segment");
+      const response = await API.get("https://crm-campaign.onrender.com/api/audience-segment");
       setAudienceSegments(response.data);
     } catch (error) {
       console.error("Error fetching audience segments:", error.response?.data || error.message);
@@ -61,7 +61,7 @@ const Campaigns = () => {
         message: campaignMessage,
       };
 
-      const response = await axios.post("http://localhost:5000/api/campaign/create", payload);
+      const response = await axios.post("https://crm-campaign.onrender.com/api/campaign/create", payload);
 
       setCampaigns([response.data.campaign, ...campaigns]);
       setOpenDialog(false);
@@ -77,7 +77,7 @@ const Campaigns = () => {
 
   const handleDeleteCampaign = async (campaignId) => {
     try {
-      await API.delete(`http://localhost:5000/api/campaign/delete/${campaignId}`);
+      await API.delete(`https://crm-campaign.onrender.com/api/campaign/delete/${campaignId}`);
       setCampaigns(campaigns.filter((campaign) => campaign._id !== campaignId));
     } catch (error) {
       console.error("Error deleting campaign:", error.response?.data || error.message);
@@ -86,7 +86,7 @@ const Campaigns = () => {
 
   const handleViewStatistics = async (campaignId) => {
     try {
-      const response = await API.get(`http://localhost:5000/api/campaign/statistics/${campaignId}`);
+      const response = await API.get(`https://crm-campaign.onrender.com/api/campaign/statistics/${campaignId}`);
       setStatistics(response.data);
       setOpenStatsDialog(true);
     } catch (error) {
@@ -96,7 +96,7 @@ const Campaigns = () => {
 
   const handleSendMessages = async (campaignId) => {
     try {
-      const response = await API.post(`http://localhost:5000/api/campaign/send-messages/${campaignId}`);
+      const response = await API.post(`https://crm-campaign.onrender.com/api/campaign/send-messages/${campaignId}`);
       const { communicationLogs } = response.data;
 
       setSentMessages((prev) => ({

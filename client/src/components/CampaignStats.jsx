@@ -10,7 +10,7 @@ const CampaignStats = ({ campaignId }) => {
 
   const fetchStats = async () => {
     try {
-      const res = await fetch(`http://localhost:4000/campaigns/${campaignId}/stats`, {
+      const res = await fetch(`https://crm-campaign.onrender.com/campaigns/${campaignId}/stats`, {
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('token')}`,
         },

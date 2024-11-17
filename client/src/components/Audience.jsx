@@ -67,7 +67,7 @@ const Audience = () => {
       };
 
       const response = await API.post(
-        "http://localhost:5000/api/audience-segment/calculatesegmentsize",
+        "https://crm-campaign.onrender.com/api/audience-segment/calculatesegmentsize",
         payload
       );
 
@@ -90,7 +90,7 @@ const Audience = () => {
         saveSegment: true, // Save the segment
       };
 
-      await API.post("http://localhost:5000/api/audience-segment/calculatesegmentsize", payload);
+      await API.post("https://crm-campaign.onrender.com/api/audience-segment/calculatesegmentsize", payload);
 
       setError("");
       alert("Segment saved successfully!");
